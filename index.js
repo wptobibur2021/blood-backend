@@ -154,7 +154,7 @@ database().catch(console.dir);
 
 // Root Get API
 app.get('/', async (req, res)=>{
-    await res.send('Backend Server ok')
+    await res.send('Backend Server Hello ok')
 })
 app.listen(port, () =>{
     console.log(`'Backend Server Start at http://localhost:${port}`)
