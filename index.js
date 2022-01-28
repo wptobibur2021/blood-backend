@@ -55,7 +55,7 @@ async function database (){
                 !user && await res.status(400).json('User not found')
                 const validPass = await bcrypt.compare(req.body.password, user.password)
                 !validPass && await res.status(400).json('Wrong Password')
-                const {password, ...others} = user._doc
+                const {password, ...others} = user
                 //await res.json(user)
                 await res.status(200).json(others)
             }catch (e) {
