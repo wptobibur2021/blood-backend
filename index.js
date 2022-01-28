@@ -55,9 +55,9 @@ async function database (){
                 !user && await res.status(400).json('User not found')
                 const validPass = await bcrypt.compare(req.body.password, user.password)
                 !validPass && await res.status(400).json('Wrong Password')
-                console.log('OK Login Now')
+                const {password, ...others} = user._doc
                 //await res.json(user)
-                await res.status(200).json(user)
+                await res.status(200).json(others)
             }catch (e) {
                 res.status(500).json(e)
             }
@@ -146,15 +146,13 @@ async function database (){
             const result = await donorCollection.deleteOne(query)
             await res.status(200).json(result)
         })
-
-
     }finally {}
 }
 database().catch(console.dir);
 
 // Root Get API
 app.get('/', async (req, res)=>{
-    await res.send('Backend Server Hello ok')
+    await res.send('Backend Server ok')
 })
 app.listen(port, () =>{
     console.log(`'Backend Server Start at http://localhost:${port}`)
